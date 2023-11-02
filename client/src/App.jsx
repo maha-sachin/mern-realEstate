@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 
@@ -9,12 +7,14 @@ import SignUp from './pages/SignUp'
 import Signin from './pages/Signin'
 import About from './pages/About'
 import Search from "./pages/Search"
+import Header from './component/Header'
 
 function App() {
   
 
   return (
     <BrowserRouter>
+    <Header/>
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/sign-in" element={<Signin/>}/>
