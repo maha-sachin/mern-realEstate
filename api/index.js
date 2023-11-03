@@ -23,3 +23,16 @@ app.listen(4000,()=>{
  app.use('/api/user',userRouter)
 
  app.use('/api/auth',authRouter)
+
+ //creare middleware api route err-is coming from i/p of the MWARE,req-data from b/client,res from stoclient,nextmw,500 internal ser.err
+
+app.use((err,req,res,next)=>{
+const statusCode = err.statusCode || 500;
+const errMessage = err.message || "Internal Server Error"
+return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    errMessage
+})
+
+})
