@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
+import dotenv from "dotenv"; 
+import userRouter from "./routes/user.route.js"
 
 dotenv.config()
 
@@ -13,5 +14,7 @@ mongoose.connect(process.env.MANGO).then(()=>{
 
 const app = express()
 
-app.listen(4000,(req,res)=>{
+app.listen(4000,()=>{
  console.log("server is running on port 400")})
+
+ app.use('/api/user',userRouter)
