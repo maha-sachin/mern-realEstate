@@ -20,7 +20,7 @@ function SignUp() {
     })
     
   }
-  console.log(formData)
+  // console.log(formData)
  
   const handleSubmit = async (e)=>{
     e.preventDefault()
@@ -44,15 +44,16 @@ function SignUp() {
       console.log(data)
       if (data.success === false){
         setLoading(false)
-        setLoading(data.message)
+        //console.log(data.errMessage)
+        setError(data.errMessage)
         return;
       }
       setLoading(false)
-      setError(null)
+      //setError(null)
       navigate('/sign-in')
     }catch(error){
       setLoading(false)
-      setError(error.message)
+      setError(error.errMessage)
 
     }
 
