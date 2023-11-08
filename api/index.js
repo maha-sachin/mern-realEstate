@@ -8,9 +8,11 @@ dotenv.config()
 
 
 
-mongoose.connect(process.env.MANGO).then(()=>{
-    console.log("connected to MongoDB")
-}).catch(err => console.log(err))
+mongoose.connect(process.env.MANGO),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
+() => {
+  console.log('Connected to MongoDB');
+}
+// }.catch(err => console.log(err))
 
 
 const app = express()
