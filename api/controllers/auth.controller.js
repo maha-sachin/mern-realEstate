@@ -23,24 +23,22 @@ export const signin = async (req, res, next) => {
 
   try {
     const dbUser = await User.findOne({ email });
-    // console.log(dbUser)
-    if (!dbUser) {
-      return next(errorHandler(400, "user not found"));
-    }
+    if (!dbUser) return next(errorHandler(400, "user not found"));
+
     const validPassword = bcryptjs.compareSync(password, dbUser.password);
-    if (!validPassword) {
+    if (!validPassword)
       return next(errorHandler(400, "invalid user_credentials"));
-    }
-    console.log(dbUser);
 
     const token = jwt.sign({ id: dbUser.id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
     const { password: pass, ...rest } = dbUser._doc;
-    // const userData = dbUser.toObject();
-    // delete userData.password;
-    res.cookie("tokens", token, { secure: false, httpOnly: true });
-    res.status(201).json({
+    const userData = dbUser.toObject();
+    delete userData.password;
+    res
+    .cookie("tokens", token, { secure: false, httpOnly: true })
+    .status(201)
+    .json({
       status: true,
       message: "logged in suceesfully",
       data: rest,
