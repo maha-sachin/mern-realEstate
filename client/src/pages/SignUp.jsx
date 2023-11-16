@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import OAuth from '../component/OAuth'
 
 
 //const restcall = fetch
@@ -71,10 +72,11 @@ function SignUp() {
         <button disabled={loading} className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-90 disabled:opacity-75'>
          { loading ? "is loading..." : "Sign Up"}
           </button>
+          <OAuth/>
       </form>
       <div className='flex gap-4 mt-5'>
         <p>Have an account?</p>
-        <Link to={"/sign-in"}><span className='text-blue-700'>sign in</span></Link>
+        <Link to={"/signin"}><span className='text-blue-700'>sign in</span></Link>
       </div>
       {error  && <p className='text-red-500 mt-5'>{error}</p>}
     </div>

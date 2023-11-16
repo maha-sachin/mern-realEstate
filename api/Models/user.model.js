@@ -16,7 +16,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required:true,
     
-}
+},
+avatar:{
+  type: String,
+ default: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/2048px-Breezeicons-actions-22-im-user.svg.png"
+},
 
 }, {timestamps : true})
 

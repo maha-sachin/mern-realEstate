@@ -13,3 +13,6 @@ Currently, two official plugins are available:
 *persistorConfig - {key,storage,version,whitelist, blacklist, version, stateReconciler, debug}
 *cretestore (persistorstore)
 *persistStore(store)
+
+- FIREBASE 
+ **npm install firebase
