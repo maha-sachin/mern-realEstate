@@ -8,6 +8,8 @@ import Signin from './pages/Signin'
 import About from './pages/About'
 import Search from "./pages/Search"
 import Header from './component/Header'
+import Profile from './pages/Profile'
+import PrivateRoute from './component/PrivateRoute'
 
 function App() {
   
@@ -21,6 +23,10 @@ function App() {
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/about" element={<About/>}/>
       <Route path="/search" element={<Search/>}/>
+        
+      <Route element={<PrivateRoute/>}>
+      <Route path="/profile" element={<Profile/>}/>
+      </Route>
         
       
     </Routes>

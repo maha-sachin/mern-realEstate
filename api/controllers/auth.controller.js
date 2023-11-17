@@ -81,8 +81,6 @@ export const google = async (req, res, next) => {
     .cookie("token",newUserToken, { httpOnly: true })
     .status(200)
     .json(rest)
-
-
     }
   } catch (err) {
     next(errorHandler(400, err.message));
