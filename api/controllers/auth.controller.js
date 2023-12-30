@@ -32,6 +32,7 @@ export const signin = async (req, res, next) => {
     if (!validPassword)
       return next(errorHandler(400, "invalid user_credentials"));
 
+      console.info(`signin dbUser.id: ${dbUser.id}`);
     const token = jwt.sign({ id: dbUser.id }, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
@@ -39,7 +40,7 @@ export const signin = async (req, res, next) => {
     // const userData = dbUser.toObject();
     // delete userData.password;
     res
-      .cookie("tokens", token, { secure: false, httpOnly: true })
+      .cookie("acc_token", token, { httpOnly: true })
       .status(201)
       .json(rest)
       // .json({
@@ -55,14 +56,16 @@ export const signin = async (req, res, next) => {
 export const google = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ email: req.body.email });
+    //console.log("exu",existingUser)
     if (existingUser) {
       const token = jwt.sign({ id: existingUser.id }, process.env.JWT_SECRET, {
         expiresIn: "30d",
       });
+      console.log(token)
       const { password: pass, ...rest } = existingUser._doc;
       
       res
-        .cookie("tokens", token, { secure: false, httpOnly: true })
+        .cookie("acc_token", token, { secure: false, httpOnly: true })
         .status(200)
         .json(rest);
     }
@@ -75,10 +78,10 @@ export const google = async (req, res, next) => {
       avatar: req.body.photo
     })
     await newUser.save()
-    const newUserToken = jwt.sign({id:newUser._id},process.env.JWT_SECRET)
+    const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET)
     const {password:pass, ...rest} = newUser._doc
     res
-    .cookie("token",newUserToken, { httpOnly: true })
+    .cookie("acc_token", token, { httpOnly: true })
     .status(200)
     .json(rest)
     }
@@ -86,3 +89,17 @@ export const google = async (req, res, next) => {
     next(errorHandler(400, err.message));
   }
 };
+
+export const signOut = (req,res,next) =>{
+
+  try{
+    res.clearCookie("acc_token")
+    res.status(200).json("user has been logged out!")
+
+  }catch(error){
+  next(error)
+  }
+
+}
+
+
