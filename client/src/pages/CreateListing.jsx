@@ -132,6 +132,7 @@ export default function CreateListing() {
         return setError('Discount price must be lower than regular price');
       setLoading(true);
       setError(false);
+      console.log("create")
       const res = await fetch('/api/listing/create', {
         method: 'POST',
         headers: {
@@ -142,6 +143,8 @@ export default function CreateListing() {
           userRef: currentUser._id,
         }),
       });
+      console.log("create")
+
       const data = await res.json();
       setLoading(false);
       if (data.success === false) {
